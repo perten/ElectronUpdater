@@ -1,0 +1,81 @@
+{
+  "name": "electron-auto-update-example",
+  "version": "1.0.11",
+  "description": "",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/perten/autoUpdate.git"
+  },
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "electron-build-w": "electron-builder -w",
+    "deploy": "electron-builder build --win --publish always",
+    "publish": "electron-builder -p onTag",
+    "package": "npm run electron-build-w && electron-builder --publish=always",
+    "release": "npm run package"
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "perten",
+      "repo": "autoUpdate",
+      "token": "<a92cf3fe86fe4f7deaa1bb9c4b5c393a329359cb>"
+    }
+  ],
+  "postinstall": "electron-builder install-app-deps",
+  "build": {
+    "appId": " com.github.perten.autoUpdate",
+    "publish": {
+      "provider": "github",
+      "token": [
+        "a92cf3fe86fe4f7deaa1bb9c4b5c393a329359cb"
+      ]
+    },
+    "productName": "Fluxble",
+    "copyright": "Copyright © 2020 https://www.target-energysolutions.com/",
+    "artifactName": "${productName}-${os}-${arch}-v${version}.${ext}",
+    "mac": {
+      "category": "public.app-category.business",
+      "target": "dmg"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "arch": "x64",
+          "target": "deb"
+        }
+      ],
+      "executableName": "fluxble",
+      "category": "Utility",
+      "description": "Fluxble desktop application for Linux",
+      "synopsis": "Fluxble"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^5.0.13",
+    "electron-builder": "^22.9.1",
+    "gh-pages": "^3.1.0"
+  },
+  "dependencies": {
+    "electron-updater": "^4.3.5"
+  }
+}
